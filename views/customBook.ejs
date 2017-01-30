@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>ADD CUSTOM BOOK</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+  <script type="text/javascript" src="/assets/js/customBook.js"></script>
+</head>
+<body>
+  <% include ../static/assets/includes/header.ejs %>
+  <div id="container">
+    <div id="form">
+      <h1>ADD YOUR OWN BOOK</h1>
+<form action="/updateProfile" method="post" id="customBook">
+  Book Title: <input type="text" placeholder="Book Title" name="title" autofocus required /><br />
+  Author: <input type="text" placeholder="Author" name="author" required /><br />
+  Brief Description: <input type="text" placeholder="Description" name="description" optional /><br />
+  <%if(data.warning===true){%><span id="warning">Invalid. Try again.</span><%}%><br />
+  <input type="submit"><button id="submit">JOIN US</button></input>
+</form>
+  <a href="/login">log in</a></div>
+</div>
+<% include ../static/assets/includes/demoFooter.ejs %>
+</body>
+</html>

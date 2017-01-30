@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>SEARCH FOR BOOKS</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+</head>
+<body>
+  <% include ../static/assets/includes/header.ejs %>
+  <div id="container">
+<h1>Search Google Books</h1>
+    <form method="POST" action="/s" id="bookSearch">
+      <input type="text" name="qText" placeholder="KEYWORD" required autofocus>
+      <select id="queryParam" name="qParam">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="subject">Subject</option>
+        <option value="ISBN">ISBN</option>
+      </select><br />
+      <input type="submit" action="Submit" value="Submit">
+    </form><br />
+    If you can't find what you're looking for, try <a href="/addBook">adding a custom book!</a>
+  </div>
+  <% include ../static/assets/includes/demoFooter.ejs %>
+</body>
+</html>

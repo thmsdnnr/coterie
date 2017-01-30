@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>LIST OF BOOKS</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+  <script type="text/javascript" src="/assets/js/listBooks.js"></script>
+</head>
+<body>
+  <% include ../static/assets/includes/header.ejs %>
+  <div id="container">
+    <div id="msg"></div>
+  <form method="POST" action="/saveBook">
+    <table id="bookResults">
+      <thead>
+        <tr>
+          <td>Title</td>
+          <td>Author</td>
+          <td>Photo</td>
+          <td>Description</td>
+          <td colspan="100">Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+    </tbody>
+    </table>
+  </form>
+  <div id="more"></div>
+</div>
+<% include ../static/assets/includes/demoFooter.ejs %>
+</body>
+</html>

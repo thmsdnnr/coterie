@@ -1,0 +1,221 @@
+html {
+  box-sizing: border-box;
+  overflow: -moz-scrollbars-vertical;
+  overflow: scroll;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+form {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+}
+
+input {
+  padding: 5px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 2em;
+  letter-spacing: 0.1em;
+  outline:none;
+}
+
+input:focus {
+  border: 2px solid silver;
+}
+
+input[type=submit] {
+  display:none;
+}
+
+button#submit {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 2em;
+  font-weight: 100;
+  letter-spacing: 0.3em;
+  border: 1px solid gold;
+  outline: none;
+}
+
+button#updateProfile{
+  width: 370px;
+  height: auto;
+  padding: 10px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.8em;
+  font-weight: 100;
+  letter-spacing: 0.3em;
+  border: 1px solid gold;
+  outline: none;
+}
+
+button#updateProfile:hover{
+  font-weight:200;
+  font-size:1.7em;
+  letter-spacing:0.25em;
+}
+
+body {
+  background-color: #F5F5F5;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-weight: 100;
+  color: rgba(240,235,200,0.9);
+}
+
+nav {
+  font-family: 'Helvetica Neue', sans-serif;
+  border-radius: 1%;
+  font-weight: 0.8em;
+  letter-spacing: 0.1em;
+  font-weight: 200;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  margin: 10px auto 10px auto;
+  padding: 15px;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: rgba(12,122,142,0.3);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+span#navElement {
+  flex: 0 1 auto;
+  padding: 4px;
+  justify-content: center;
+}
+
+span#navElement a {
+  display:inline-block;
+  color: tomato;
+}
+
+span#navElement a:hover {
+  font-weight:200;
+  color: green;
+}
+
+span#userHead{
+  background-color: rgba(222,91,73,0.7);
+  font-size: 2em;
+  font-family: 'Courier New';
+}
+
+span#demoFooter {
+  display: inline;
+  text-align: left;
+  width: auto;
+  margin: auto;
+  font-size: 0.9em;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
+  color: black;
+  position: fixed;
+  top: 10;
+  right: 10;
+  text-align: right;
+  color: rgba(0,0,0,0.3);
+}
+
+div#description {
+  font-size: 0.8em;
+  width: 400px;
+  border: 1px solid silver;
+}
+
+span#demoFooter a {
+  color: green;
+  background-color: rgba(0,0,0,0);
+}
+
+.grid-item {
+  width: 300px;
+  height: auto;
+}
+
+div.grid {
+  width: 1000px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+table#bookResults {
+  width: 700px;
+  margin: auto;
+}
+
+div#container {
+  position: relative;
+  width: 800px;
+  height: auto;
+  margin: auto;
+  padding: 15px;
+  background-color: rgba(50,77,92,0.8);
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+div.row {
+  display: flex;
+  flex-flow: row wrap;
+  width: 700px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+div#description {
+  max-height: 200px;
+  overflow-y: scroll;
+  width: auto;
+}
+
+
+table#tradeRequests {
+  border: 3px solid green;
+}
+
+table#myTrades {
+  border: 3px solid red;
+}
+
+thead {
+  text-align: center;
+}
+
+div#more {
+  float:right;
+}
+
+a {
+  font-size: 1em;
+  color: silver;
+}
+
+a:visited {
+  font-size: 1em;
+  color: silver;
+}
+
+a:hover {
+  color:white;
+}
+
+h2 {
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  color: white;
+}
+
+td {
+  vertical-align: middle;
+  padding: 5px;
+  width: auto;
+  text-align: left;
+}

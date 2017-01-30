@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>LOGIN TO COTERIE</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>window.INITIAL_STATE = <%-JSON.stringify(data)%>;</script>
+</head>
+<body>
+  <% include ../static/assets/includes/header.ejs %>
+  <div id="container">
+    <div id="form">
+    <h1>Welcome. You're among friends.</h1>
+      <form action="/login" method="post">
+        <input type="text" placeholder="Username" name="username" autofocus required /><br />
+        <input type="password" placeholder="Password" name="password" required /><br />
+        <%if(data.warning===true){%><span id="warning">Invalid. Try again.</span><%}%><br />
+        <input type="submit"><button id="submit">COME IN</button></input>
+      </form>
+      <a href="/register">register</a><br />
+    </div>
+  </div>
+  <% include ../static/assets/includes/demoFooter.ejs %>
+</body>
+</html>
