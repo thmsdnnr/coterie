@@ -121,49 +121,44 @@ function completeTradeRequest(gid) {
       row.innerHTML+=`<td>${thumbnail}</td>`;
       row.innerHTML+=`<td><div id="description">${description}</div></td>`;
 
-      if (data.query) { //if this is a search query add option to ADD TO BOOKSHELF.
+      //add potential actions depending on whether this is a search query or a display of a user's shelf
+      if (q) { //if this is a search query add option to ADD TO BOOKSHELF.
         //Otherwise you're requesting a trade or looking at your own books.
         row.innerHTML+=`<td><a href="#" id="${bID}" class="addToShelf">ADD TO MY BOOKS</a>`;
-      }
-      else {
-        row.innerHTML+=`<td></td>`;
-      }
-
-      if ((data.pageUser!==data.user)&&(!tradeOptions)) { //you cannot trade with yourself
-        row.innerHTML+=`<td><a href="#" id="${bID}" class="trade">propose trade</a></td>`;
-      }
-      else if((data.pageUser!==data.user)&&(tradeOptions)) { row.innerHTML+=`<td><a href="#" id="${bID}" class="tradeFor">TRADE FOR ${tradeResult.tradeForName}</td>`; }
-      else {
-        row.innerHTML+=`<td></td>`;
-      }
-      if (book._id===book.gid) { // this is a user-defined book, so don't show a "Read on Google Books" link
-        row.innerHTML+=`<td></td>`;
-      }
-      else { //otherwise, we can show "Read on Google Books"
         row.innerHTML+=`<td><a href="${book.accessInfo.webReaderLink}" target="_new"><img src="/assets/images/gbs_preview.png"></a></td>`;
       }
-      bTable.appendChild(row); //add to the table
-    }
-
-    //add if statement here to only display "more" if books.totalItems > startAtIndex*items-per-page
-    if (q) { //if this is a search and not a simple list
-      if (Math.floor((data.totalItems/resultsPerPage))>data.query.startIndex) {
-        //IF there are more results to show on the next page, provide a link to click to display them.
-        let moreResults=document.createElement('span');
-        moreResults.innerHTML=`<a href="#" id="nextResults">MORE RESULTS</a>`;
-        let more=document.querySelector('div#more');
-        more.innerHTML=null;
-        more.append(moreResults);
-        let nextRes = document.getElementById('nextResults');
-        nextRes.addEventListener('click',requestMore);
+      else {
+        row.innerHTML+=`<td></td>`;
+        if ((data.pageUser!==data.user)&&(!tradeOptions)) { //you cannot trade with yourself
+          row.innerHTML+=`<td><a href="#" id="${bID}" class="trade">propose trade</a></td>`;
+        }
+        else if((data.pageUser!==data.user)&&(tradeOptions)) { row.innerHTML+=`<td><a href="#" id="${bID}" class="tradeFor">TRADE FOR ${tradeResult.tradeForName}</td>`; }
+        else {
+          row.innerHTML+=`<td></td>`;
+        }
+      // this is a user-defined book, so don't show a "Read on Google Books" link
+      if (book._id===book.gid) { row.innerHTML+=`<td></td>`; }
+      else { row.innerHTML+=`<td><a href="${book.accessInfo.webReaderLink}" target="_new"><img src="/assets/images/gbs_preview.png"></a></td>`; }
       }
-
+    bTable.appendChild(row); //add to the table
+  //add if statement here to only display "more" if books.totalItems > startAtIndex*items-per-page
+  }
+  if (q) { //if this is a search and not a simple list
+    if (Math.floor((data.totalItems/resultsPerPage))>data.query.startIndex) {
+      //IF there are more results to show on the next page, provide a link to click to display them.
+      let moreResults=document.createElement('span');
+      moreResults.innerHTML=`<a href="#" id="nextResults">MORE RESULTS</a>`;
+      let more=document.querySelector('div#more');
+      more.innerHTML=null;
+      more.append(moreResults);
+      let nextRes = document.getElementById('nextResults');
+      nextRes.addEventListener('click',requestMore);
+    }
     let addLinks=document.querySelectorAll('a.addToShelf');
     addLinks.forEach((link)=>link.addEventListener('click',handleAdd));
   }
     let tradeLinks=document.querySelectorAll('a.trade');
     tradeLinks.forEach((link)=>link.addEventListener('click',handleTrade));
-
     if (tradeOptions){
       let tradeFor=document.querySelectorAll('a.tradeFor');
       tradeFor.forEach((link)=>link.addEventListener('click',handleTradeFinish));

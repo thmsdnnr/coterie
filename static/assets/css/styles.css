@@ -253,7 +253,9 @@ thead {
 }
 
 div#more {
-  float:right;
+  position: absolute;
+  bottom: 10;
+  right: 10;
 }
 
 a {
