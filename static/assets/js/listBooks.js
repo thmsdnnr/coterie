@@ -8,7 +8,7 @@ window.onload = function() {
   if (data.books.length) { renderTable(data.books); }
   else {
       let cont=document.querySelector('div#container');
-      cont.innerHTML=`It appears you have no books right now.`;
+      cont.innerHTML=`This user does not have any books right now.`;
   }
 
   function requestMoreResults(query) {
@@ -72,6 +72,8 @@ function proposeTrade(gid) {
 }
 
 function completeTradeRequest(gid) {
+  console.log('completeTradeRequest');
+  let message=document.querySelector('div#msg');
   let title=document.querySelector(`span#title${gid}`).innerHTML;
   fetch('/completeTradeRequest',{
     headers: {
@@ -82,17 +84,16 @@ function completeTradeRequest(gid) {
     credentials: "include",
     body: `userRequestedFromBookID=${gid}&userRequesting=${data.user}&userRequestedFrom=${data.pageUser}&userRequestingBookID=${tradeResult.tradeFor}`
   }).then(response=>{ //TODO what should this do
-      return response.json();
-    }).then(parsed_result=>{
-      tradeResult=parsed_result;
-      tradeOptions=true;
-      renderTable(parsed_result.books);
       tradeOptions=false;
+      let bR=document.querySelector('table#bookResults');
+      bR.style.display='none';
+      message.innerHTML=`<p>We've contacted the user with your trade request. Keep track of its status <a href="/trades">here</a>. GOOD LUCK!</p>`;
       window.scrollTo(0,0);
 });
 }
 
   function renderTable(d) {
+    console.log(tradeOptions);
     data=window.INITIAL_STATE;
     let bTable=document.querySelector('table#bookResults tbody');
     bTable.innerHTML=null;
@@ -105,7 +106,7 @@ function completeTradeRequest(gid) {
       let subtitle;
       (book.volumeInfo.subtitle) ? subtitle=book.volumeInfo.subtitle : subtitle='';
       let thumbnail;
-      (book.volumeInfo.imageLinks) ? thumbnail=`<img src="${book.volumeInfo.imageLinks.smallThumbnail}">` : thumbnail=`no image`;
+      (book.volumeInfo.imageLinks) ? thumbnail=`<img src="${book.volumeInfo.imageLinks.smallThumbnail}" class="bookThumb">` : thumbnail=`no image`;
       let authors=`<ul>`;
       if(book.volumeInfo.authors) {
         book.volumeInfo.authors.forEach((a)=>authors+=`<li>${a}</li>`);
@@ -131,7 +132,7 @@ function completeTradeRequest(gid) {
       if ((data.pageUser!==data.user)&&(!tradeOptions)) { //you cannot trade with yourself
         row.innerHTML+=`<td><a href="#" id="${bID}" class="trade">propose trade</a></td>`;
       }
-      else if(tradeOptions) { row.innerHTML+=`<td><a href="#" id="${bID}" class="tradeFor">TRADE FOR ${tradeResult.tradeForName}</td>`; }
+      else if((data.pageUser!==data.user)&&(tradeOptions)) { row.innerHTML+=`<td><a href="#" id="${bID}" class="tradeFor">TRADE FOR ${tradeResult.tradeForName}</td>`; }
       else {
         row.innerHTML+=`<td></td>`;
       }

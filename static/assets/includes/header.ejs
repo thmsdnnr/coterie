@@ -1,15 +1,11 @@
 <nav>
-  <p><span id="navElement"><a href="/"><img src="/assets/images/coterieB.png"></a></span>
+  <p><span id="navElement"><a href="/"><img src="/assets/images/coterieB.png"></a></span></p>
   <%if (data.user) {%>
-  <span id="navElement">OHAY <span id="userHead"><%=data.user%></span> SUP BRAH</span></p>
   <p><span id="navElement"><a href="/search">ADD BOOKS</a></span>
   <span id="navElement"><a href="/updateProfile">UPDATE PROFILE</a></span>
   <span id="navElement"><a href="/u/<%=data.user%>">MY SHELF</a></span>
   <span id="navElement"><a href="/everyone">EVERYONE'S BOOKS</a></span>
   <span id="navElement"><a href="/trades">TRADES</a></span>
-  <span id="navElement"><a href="/logout">LOG OUT</a></span><br />
+  <span id="navElement"><a href="/logout">LOG OUT</a></span></p>
   <%}%>
-  <%if (!data.user) {%>
-    <span id="navElement"><a href="/login">LOG IN</a></span>
-    <%}%></p>
 </nav>

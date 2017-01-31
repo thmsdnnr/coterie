@@ -10,3 +10,7 @@
 [X]	4. User Story: I can propose a trade and wait for the other user to accept the trade.
 [X] Make the "ADD TO MY BOOKS" not appear on my own page!
 [X] Add HELMET to your apps for protection
+
+nice:
+git diff --shortstat `git hash-object -t tree /dev/null`
+(+) 1470 lines

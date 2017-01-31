@@ -8,11 +8,10 @@
 <body>
   <% include ../static/assets/includes/header.ejs %>
   <div id="container">
-    <div id="msg"></div>
-  <form method="POST" action="/saveBook">
-    <div id="container">
       <h1>LIST OF TRADES</h1>
-      <table id="tradeRequests">
+      <div id="msg"></div>
+    <form method="POST" action="/trades">
+      <table id="tradeRequests" class="trade">
         <thead>
           <tr>
             <td>This Person</td>
@@ -24,13 +23,13 @@
         <tbody>
       </tbody>
       </table>
-    <table id="myTrades">
+    <table id="myTrades" class="trade">
       <thead>
         <tr>
           <td>You asked</td>
           <td>To trade this</td>
           <td>For this</td>
-          <td>Actions</td>
+          <td colspan="100">Status/Actions</td>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +37,6 @@
     </table>
   </form>
   <div id="more"></div>
-</div>
 </div>
 <% include ../static/assets/includes/demoFooter.ejs %>
 </body>

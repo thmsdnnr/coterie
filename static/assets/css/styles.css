@@ -17,7 +17,7 @@ form {
 input {
   padding: 5px;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 2em;
+  font-size: 1.8em;
   letter-spacing: 0.1em;
   outline:none;
 }
@@ -43,21 +43,17 @@ button#submit {
 }
 
 button#updateProfile{
-  width: 370px;
+  width: 324px;
   height: auto;
+  margin: 2px;
   padding: 10px;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 1.8em;
-  font-weight: 100;
+  font-size: 1.4em;
+  font-weight: 200;
   letter-spacing: 0.3em;
-  border: 1px solid gold;
+  background-color: #F5F5F5;
   outline: none;
-}
-
-button#updateProfile:hover{
-  font-weight:200;
-  font-size:1.7em;
-  letter-spacing:0.25em;
+  border: none;
 }
 
 body {
@@ -66,7 +62,7 @@ body {
   font-size: 1em;
   letter-spacing: 0.1em;
   font-weight: 100;
-  color: rgba(240,235,200,0.9);
+  color: rgba(240,235,200,1.0);
 }
 
 nav {
@@ -76,13 +72,14 @@ nav {
   letter-spacing: 0.1em;
   font-weight: 200;
   justify-content: center;
+  max-width: 870px;
   width: auto;
   height: auto;
   margin: 10px auto 10px auto;
   padding: 15px;
   display: flex;
   flex-flow: row wrap;
-  background-color: rgba(12,122,142,0.3);
+  background-color: rgba(12,122,142,0.2);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -108,19 +105,24 @@ span#userHead{
   font-family: 'Courier New';
 }
 
+p {
+  padding: 14px;
+  margin: 7px;
+}
+
 span#demoFooter {
   display: inline;
   text-align: left;
   width: auto;
   margin: auto;
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-family: 'Courier New', monospace;
   letter-spacing: 0.1em;
   color: black;
   position: fixed;
-  top: 10;
-  right: 10;
-  text-align: right;
+  left: 2;
+  bottom: 2;
+  text-align: left;
   color: rgba(0,0,0,0.3);
 }
 
@@ -152,14 +154,40 @@ table#bookResults {
 }
 
 div#container {
+  display: block;
   position: relative;
-  width: 800px;
+  width: auto;
+  max-width: 900px;
   height: auto;
   margin: auto;
   padding: 15px;
-  background-color: rgba(50,77,92,0.8);
+  background-color: rgba(50,77,92,1.0);
   text-align: center;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  justify-content: center;
+}
+
+div#parentContainer {
+  position: relative;
+  width: auto;
+  max-width: 900px;
+  height: auto;
+  margin: auto;
+  padding: 15px;
+  background-color: rgba(50,77,92,1.0);
+  text-align: center;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+div#child {
+  border: 2px inset gold;
+  border-radius: 1%;
+  flex: 0 1 auto;
+  padding: 10px;
+  margin: 5px;
 }
 
 div.row {
@@ -176,13 +204,48 @@ div#description {
   width: auto;
 }
 
-
 table#tradeRequests {
-  border: 3px solid green;
+  display: none;
+  margin: auto;
+  width: 700px;
+}
+
+button.tradeDecision {
+  height: 40px;
+  width: 40px;
+  border: 3px outset gold;
+  background-color: silver;
+  outline: none;
+}
+
+button.cancelTrade {
+  height: 40px;
+  width: 70px;
+  border: 3px outset gold;
+  background-color: silver;
+  outline: none;
+}
+
+thead {
+  font-size: 1.5em;
+  font-family: 'Courier New', monospace;
+  font-style: italic;
+  color: #FFF;
+}
+
+img.bookThumb {
+  max-width:80px;
+  height:auto;
+  display:inline;
+  border-radius:10%;
+  border: 2px solid black;
+  float: left;
 }
 
 table#myTrades {
-  border: 3px solid red;
+  display:none;
+  margin: auto;
+  width: 700px;
 }
 
 thead {
@@ -215,7 +278,12 @@ h2 {
 
 td {
   vertical-align: middle;
-  padding: 5px;
+  padding: 10px;
   width: auto;
   text-align: left;
+  text-align: center;
+}
+
+table tr {
+  border: 1px solid black;
 }

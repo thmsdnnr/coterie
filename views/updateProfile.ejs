@@ -9,13 +9,13 @@
   <% include ../static/assets/includes/header.ejs %>
   <div id="container">
       <h1>UPDATE YOUR PROFILE</h1>
-      <p><div id="current"></div></p>
-<p><form action="/updateProfile" method="post" id="uP">
+      <div id="current"></div><br />
+<form action="/updateProfile" method="post" id="uP">
   <input type="text" placeholder="Full Name" name="fullName" autofocus optional /><br />
   <input type="text" placeholder="City" name="city" optional /><br />
   <input type="text" placeholder="State" name="state" optional /><br />
   <input type="submit"><button id="updateProfile">UPDATE PROFILE</button></input>
-</form></p>
+</form>
 <% include ../static/assets/includes/demoFooter.ejs %>
 </body>
 </html>

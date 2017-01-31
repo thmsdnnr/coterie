@@ -4,12 +4,12 @@ window.onload = function() {
   let name=document.querySelector('input[name=fullName]');
   let city=document.querySelector('input[name=city]');
   let state=document.querySelector('input[name=state]');
-  name.value=data.fullName;
-  city.value=data.city;
-  state.value=data.state;
-
+  (data.fullName!=='undefined') ? name.value=data.fullName : name.value='';
+  (data.city!=='undefined') ? city.value=data.city : city.value='';
+  (data.state!=='undefined') ? state.value=data.state : state.value='';
+  if(data.city){console.log(data.city);}
   let current=document.querySelector('div#current');
-  current.innerHTML+=`Full Name: ${data.fullName}<br />`;
-  current.innerHTML+=`City: ${data.city}<br />`;
-  current.innerHTML+=`State: ${data.state}<br />`;
+  current.innerHTML+=`Full Name: ${name.value}<br />`;
+  current.innerHTML+=`City: ${city.value}<br />`;
+  current.innerHTML+=`State: ${state.value}<br />`;
 }

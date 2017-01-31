@@ -63,6 +63,7 @@ app.post('/addBook', function(req,res) {
   Db.saveCustomBook({title:req.body.title,description:req.body.description,author:req.body.author}, function(err, data){
     if(!err) {
       Db.addUserBook({username:req.session.user, bookID:data._id}, function(err, data){
+        res.redirect(`/u/${req.session.user}`);
       });
     }
   });
@@ -134,7 +135,10 @@ app.post('/proposeTrade', function(req,res) {
     books=books.filter((book)=>book!==undefined).filter((book)=>book.gid!==req.body.userRequestedFromBookID);
     let payload={books:books,user:req.session.user,pageUser:req.session.user,tradeUser:req.body.userRequestedFrom,tradeFor:req.body.userRequestedFromBookID,tradeForName:req.body.tradeForName};
     res.send(JSON.stringify(payload));
-  }).catch((err)=>console.log(err));
+  }).catch((err)=>{
+    console.log(err);
+    res.redirect('/');
+  });
 });
 
 app.post('/completeTradeRequest', function(req,res) {
@@ -146,7 +150,7 @@ app.post('/completeTradeRequest', function(req,res) {
     inExchangeFor: inExchangeFor, status: 'PEND'},
     function(err,data) {
     if (!err) {
-      res.redirect('/trades');
+      res.send(data);
     }
   });
 });
@@ -205,11 +209,13 @@ app.get('/trades', auth, function(req, res) {
 //if ACCEPT or REJECT, req.session.user must eq requestedU
 //if CANCEL, req.sesssion.user must eq requestingU
 app.post('/trades', function(req,res) { //TODO cleanup with promises or something PLZ
-  Db.findTradeByID({id:req.body.id},function(err,data){
+  let action=Object.keys(req.body)[0];
+  let id=req.body[action];
+  Db.findTradeByID({id:id},function(err,data){
     if(!err) {
-      if (req.body.action==='ACCEPT'||req.body.action==='REJECT') {
+      if (action==='ACCEPT'||action==='REJECT') {
         if(req.session.user===data.requestedU) { //valid, execute action on ID
-          if(req.body.action==='ACCEPT') {
+          if(action==='ACCEPT') {
             let userA=data.requestingU;
             let bookA=data.inExchangeFor; //A loses Book A & gains Book B
             let userB=data.requestedU; //B loses Book B & gains Book A
@@ -217,7 +223,7 @@ app.post('/trades', function(req,res) { //TODO cleanup with promises or somethin
             console.log(`{bookA:${bookA},bookB:${bookB},userA:${userA},userB:${userB}`);
             Db.tradeTwoBooks({bookA:bookA,bookB:bookB,userA:userA,userB:userB}, function(err, data) {
                 if (!err) {
-                  Db.updateTradeStatus({id:req.body.id,status:'COMPLETE'},function(err,data){
+                  Db.updateTradeStatus({id:id,status:'COMPLETE'},function(err,data){
                     if(!err) {
                       res.redirect('/trades');
                     }
@@ -226,7 +232,7 @@ app.post('/trades', function(req,res) { //TODO cleanup with promises or somethin
               });
             }
             else { //reject trade
-              Db.updateTradeStatus({id:req.body.id,status:'REJECTED'},function(err,data){
+              Db.updateTradeStatus({id:id,status:'REJECTED'},function(err,data){
                 if(!err) {
                   res.redirect('/trades'); //TODO this redirect doesn't work?!  //have to click REFRESH to see the update
                 }
@@ -241,7 +247,7 @@ app.post('/trades', function(req,res) { //TODO cleanup with promises or somethin
         if (req.session.user===data.requestingU) {
           console.log('canceltrade');
           //Db update status then redirect to trades
-          Db.updateTradeStatus({id:req.body.id,status:'CANCEL'},function(err,data){
+          Db.updateTradeStatus({id:id,status:'CANCEL'},function(err,data){
             if(!err) {
               console.log(data);
               res.redirect('/trades');
@@ -265,7 +271,10 @@ app.get('/u/:username', auth, function(req,res) {
     books=books.filter((book)=>book!==undefined);
     let payload={books:books,user:req.session.user,pageUser:req.params.username};
     res.render('list',{data:payload});
-  }).catch((err)=>console.log(err));
+  }).catch((err)=>{
+    console.log(err);
+    res.redirect('/');
+  });
 });
 
 app.get('/everyone', function(req,res) {
@@ -367,7 +376,7 @@ app.get('/', function(req,res) {
 });
 
 app.get('*', function(req,res) {
-  res.send('catch-all');
+  res.redirect('/');
 });
 
 app.listen(process.env.PORT||3000);

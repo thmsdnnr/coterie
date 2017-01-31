@@ -1,5 +1,5 @@
 window.onload=function() {
-  let c=document.querySelector('div#container');
+  let c=document.querySelector('div#parentContainer');
   let users=window.INITIAL_STATE.users;
   if (users.length) {
     for (var i=0;i<users.length;i++) {
@@ -17,7 +17,8 @@ window.onload=function() {
       let locString;
       (city&&state) ? locString=`from: ${city}, ${state}` : null;
       let d=document.createElement('div');
-      d.innerHTML+=`<a href="/u/${user}">${user}</a> currently has ${users[i].booksOwned.length} ${bookword}!<br />`
+      d.id='child';
+      d.innerHTML+=`<h1><a href="/u/${user}">${user}</a></h1> currently has ${users[i].booksOwned.length} ${bookword}!<br />`;
       if((name||city)||state){d.innerHTML+=`(PROFILE: ${name} ${city} ${state})`;}
       c.appendChild(d);
     }

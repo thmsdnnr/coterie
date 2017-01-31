@@ -6,11 +6,10 @@
 <body>
   <% include ../static/assets/includes/header.ejs %>
   <div id="container">
-    <div id="form">
-      <h2><%=data.header%></h2>
+      <p><h1><%=data.header%></h1>
       <span id="message"><%=data.message%><%if (data.link){%>You can now <a href="<%=data.link%>">login</a>.
       <%}%></span>
-    </div>
+    </p>
   </div>
   <% include ../static/assets/includes/demoFooter.ejs %>
 </body>
